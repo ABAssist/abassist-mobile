@@ -1,76 +1,94 @@
-
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="icon" href="favicon.ico" type="image/x-icon">
-  <title>ABA Autofill Tool</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ABA Autofill</title>
   <style>
     body {
-      font-family: sans-serif;
+      font-family: Arial, sans-serif;
+      background: #f8f8f8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       padding: 20px;
-      background-color: #f4f4f4;
+      min-height: 100vh;
     }
+
     .container {
-      max-width: 400px;
-      margin: auto;
       background: white;
       padding: 20px;
-      border-radius: 12px;
+      border-radius: 15px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      max-width: 400px;
+      width: 100%;
     }
+
     h2 {
       color: #49A468;
-      font-size: 18px;
-      margin-bottom: 20px;
+      margin-bottom: 10px;
+      font-size: 20px;
     }
+
     label {
       display: block;
       font-weight: bold;
-      margin-top: 12px;
-      margin-bottom: 6px;
+      margin-top: 15px;
+      margin-bottom: 5px;
     }
-    input, textarea {
+
+    input[type="text"],
+    textarea {
       width: 100%;
+      box-sizing: border-box;
       padding: 10px;
-      font-size: 16px;
-      margin-bottom: 10px;
-      border: 1px solid #ccc;
+      font-size: 14px;
       border-radius: 6px;
+      border: 1px solid #ccc;
     }
+
+    textarea {
+      resize: vertical;
+    }
+
     .reinforcers {
       display: flex;
-      gap: 10px;
-      margin-bottom: 10px;
-      flex-wrap: wrap;
+      gap: 15px;
+      margin-top: 5px;
     }
+
     .reinforcers label {
       font-weight: normal;
-      font-size: 14px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-size: 13px;
     }
+
     button {
-      background: #28a745;
+      background: #49A468;
       color: white;
-      padding: 12px;
-      border: none;
-      width: 100%;
       font-weight: bold;
       font-size: 16px;
+      padding: 12px;
+      margin-top: 20px;
+      border: none;
       border-radius: 6px;
+      width: 100%;
       cursor: pointer;
     }
+
     .footer {
-      text-align: center;
-      font-size: 12px;
-      color: #aaa;
       margin-top: 20px;
+      font-size: 12px;
+      color: #888;
+      text-align: center;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h2><b>ABA</b>ssist – Autofill</h2>
+    <h2>ABAassist – Autofill</h2>
 
     <label for="bx">BX (comma-separated)</label>
     <input type="text" id="bx" placeholder="e.g. 1,2,3" />
@@ -88,22 +106,23 @@
     <label for="note">NOTE</label>
     <textarea id="note" rows="4" placeholder="Type your note here..."></textarea>
 
-    <button onclick="generate()">COPY</button>
+    <button onclick="copyContent()">COPY</button>
 
     <div class="footer">© 2025 ABAssist</div>
   </div>
 
   <script>
-    function generate() {
+    function copyContent() {
       const bx = document.getElementById("bx").value;
       const skills = document.getElementById("skills").value;
       const note = document.getElementById("note").value;
+
       const reinforcers = Array.from(document.querySelectorAll(".reinforcers input:checked"))
         .map(cb => cb.value)
         .join(", ");
 
-      const result = "BX: " + bx + "\nSKILLS: " + skills + "\nREINFORCERS: " + reinforcers + "\nNOTE: " + note;
-      navigator.clipboard.writeText(result).then(() => {
+      const text = `BX: ${bx}\nSKILLS: ${skills}\nREINFORCERS: ${reinforcers}\nNOTE: ${note}`;
+      navigator.clipboard.writeText(text).then(() => {
         alert("✅ Copied to clipboard!");
       });
     }
