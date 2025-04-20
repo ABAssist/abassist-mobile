@@ -1,0 +1,111 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ABA Autofill Tool</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 20px;
+      background-color: #f4f4f4;
+    }
+    .container {
+      max-width: 400px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+      color: #49A468;
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      font-weight: bold;
+      margin-top: 12px;
+      margin-bottom: 6px;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    .reinforcers {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+    .reinforcers label {
+      font-weight: normal;
+      font-size: 14px;
+    }
+    button {
+      background: #28a745;
+      color: white;
+      padding: 12px;
+      border: none;
+      width: 100%;
+      font-weight: bold;
+      font-size: 16px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .footer {
+      text-align: center;
+      font-size: 12px;
+      color: #aaa;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2><b>ABA</b>ssist – Autofill</h2>
+
+    <label for="bx">BX (comma-separated)</label>
+    <input type="text" id="bx" placeholder="e.g. 1,2,3" />
+
+    <label for="skills">SKILLS (comma-separated)</label>
+    <input type="text" id="skills" placeholder="e.g. 8,9,10" />
+
+    <label>REINFORCERS</label>
+    <div class="reinforcers">
+      <label><input type="checkbox" value="Edibles" /> Edibles</label>
+      <label><input type="checkbox" value="Tangibles" /> Tangibles</label>
+      <label><input type="checkbox" value="Social" /> Social</label>
+    </div>
+
+    <label for="note">NOTE</label>
+    <textarea id="note" rows="4" placeholder="Type your note here..."></textarea>
+
+    <button onclick="generate()">COPY</button>
+
+    <div class="footer">© 2025 ABAssist</div>
+  </div>
+
+  <script>
+    function generate() {
+      const bx = document.getElementById("bx").value;
+      const skills = document.getElementById("skills").value;
+      const note = document.getElementById("note").value;
+      const reinforcers = Array.from(document.querySelectorAll(".reinforcers input:checked"))
+        .map(cb => cb.value)
+        .join(", ");
+
+      const result = "BX: " + bx + "\nSKILLS: " + skills + "\nREINFORCERS: " + reinforcers + "\nNOTE: " + note;
+      navigator.clipboard.writeText(result).then(() => {
+        alert("✅ Copied to clipboard!");
+      });
+    }
+  </script>
+</body>
+</html>
