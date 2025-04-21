@@ -1,0 +1,20 @@
+{
+  "name": "ABA Autofill",
+  "short_name": "ABA Autofill",
+  "start_url": "./abassist_mobile_autofill.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#49A468",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
